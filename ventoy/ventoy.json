@@ -1,0 +1,9 @@
+{
+  "control": [
+    { "VTOY_DEFAULT_MENU_MODE": "0" },
+    { "VTOY_FILT_DOT_UNDERSCORE_FILE": "1" }
+  ],
+  "theme": {
+    "file": "/ventoy/themes/reforge/theme.txt"
+  }
+}

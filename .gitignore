@@ -1,0 +1,49 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Build outputs
+/build/
+/dist/
+/out/
+/tmp/
+/cache/
+
+# Large/generated assets
+*.iso
+*.img
+*.qcow2
+*.vhd
+*.vhdx
+*.wim
+*.esd
+*.bin
+*.tar
+*.tar.gz
+*.tar.xz
+*.zip
+*.7z
+*.xz
+*.zst
+*.gz
+
+# Logs and manifests generated during testing
+*.log
+*.tmp
+
+# Checksums or manifests can be versioned intentionally in manifests/
+!manifests/*.txt
+!manifests/*.json
+!manifests/*.yaml
+!manifests/*.yml
+
+# Example places for local working content
+payload/
+iso/
+downloads/
+backups/
+work/

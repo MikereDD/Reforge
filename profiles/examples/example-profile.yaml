@@ -1,0 +1,15 @@
+name: Example Profile
+machine: example-machine
+os_targets:
+  - windows-11
+  - linux-mint
+backup:
+  include:
+    - Documents
+    - Desktop
+    - Pictures
+    - Downloads
+restore:
+  apps: []
+  notes:
+    - Fill in application restore logic later.
