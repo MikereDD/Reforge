@@ -36,7 +36,9 @@
       "onlineRequired": true,
       "recommended": true,
       "resolver": {
-        "type": "upstream-latest"
+        "type": "upstream-latest",
+        "provider": "archlinux",
+        "url": "https://archlinux.org/releng/releases/json/"
       },
       "verification": {
         "required": true,

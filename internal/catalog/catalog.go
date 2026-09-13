@@ -25,8 +25,9 @@ type Entry struct {
 }
 
 type Resolver struct {
-	Type string `json:"type"`
-	URL  string `json:"url,omitempty"`
+	Type     string `json:"type"`
+	Provider string `json:"provider,omitempty"`
+	URL      string `json:"url,omitempty"`
 }
 
 type Verification struct {

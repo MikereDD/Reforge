@@ -2,12 +2,15 @@ package main
 
 import (
 	"bufio"
+	"context"
 	"errors"
 	"flag"
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/MikereDD/Reforge/internal/catalog"
+	"github.com/MikereDD/Reforge/internal/resolver"
 	"github.com/MikereDD/Reforge/internal/ui"
 )
 
@@ -56,7 +59,32 @@ func main() {
 
 	fmt.Fprintf(
 		os.Stdout,
-		"\nSelected %s. Payload resolution is not implemented yet.\n",
+		"\nResolving %s from official upstream infrastructure...\n",
 		entry.Name,
 	)
+
+	ctx, cancel := context.WithTimeout(
+		context.Background(),
+		20*time.Second,
+	)
+	defer cancel()
+
+	registry := resolver.New(nil)
+
+	target, err := registry.Resolve(ctx, entry)
+	if err != nil {
+		if errors.Is(err, resolver.ErrUnsupported) {
+			fmt.Fprintf(
+				os.Stdout,
+				"\nResolver for %s is not implemented yet.\n",
+				entry.Name,
+			)
+			return
+		}
+
+		fmt.Fprintf(os.Stderr, "reforge: %v\n", err)
+		os.Exit(1)
+	}
+
+	ui.PrintResolvedTarget(os.Stdout, target)
 }

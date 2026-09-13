@@ -74,6 +74,10 @@
               "type": "string",
               "enum": ["static", "remote-manifest", "upstream-latest"]
             },
+            "provider": {
+              "type": "string",
+              "pattern": "^[a-z0-9][a-z0-9-]*$"
+            },
             "url": { "type": "string", "format": "uri" }
           },
           "required": ["type"]
