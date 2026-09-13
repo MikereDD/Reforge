@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "1.0",
+  "generatedAt": "2026-09-13T00:00:00Z",
+  "entries": [
+    {
+      "id": "windows-11",
+      "name": "Windows 11",
+      "kind": "os",
+      "menuOrder": 1,
+      "architecture": ["x86_64"],
+      "channel": "current",
+      "sourcePolicy": "official-only",
+      "bootMethod": "wim",
+      "onlineRequired": true,
+      "recommended": true,
+      "resolver": {
+        "type": "remote-manifest"
+      },
+      "verification": {
+        "required": true,
+        "methods": ["sha256", "authenticode"]
+      },
+      "notes": [
+        "Prefer Microsoft-hosted payloads and metadata where practical."
+      ]
+    },
+    {
+      "id": "arch-linux",
+      "name": "Arch Linux",
+      "kind": "os",
+      "menuOrder": 2,
+      "architecture": ["x86_64"],
+      "channel": "rolling",
+      "sourcePolicy": "official-only",
+      "bootMethod": "netboot",
+      "onlineRequired": true,
+      "recommended": true,
+      "resolver": {
+        "type": "upstream-latest"
+      },
+      "verification": {
+        "required": true,
+        "methods": ["sha256", "gpg"]
+      },
+      "notes": [
+        "Primary Linux target and first guided Linux installer path."
+      ]
+    },
+    {
+      "id": "linux-mint",
+      "name": "Linux Mint",
+      "kind": "os",
+      "menuOrder": 3,
+      "architecture": ["x86_64"],
+      "channel": "stable",
+      "sourcePolicy": "official-preferred",
+      "bootMethod": "iso",
+      "onlineRequired": true,
+      "recommended": true,
+      "verification": {
+        "required": true,
+        "methods": ["sha256", "gpg"]
+      }
+    },
+    {
+      "id": "ubuntu-lts",
+      "name": "Ubuntu LTS",
+      "kind": "os",
+      "menuOrder": 4,
+      "architecture": ["x86_64"],
+      "channel": "lts",
+      "sourcePolicy": "official-only",
+      "bootMethod": "netboot",
+      "onlineRequired": true,
+      "recommended": true,
+      "verification": {
+        "required": true,
+        "methods": ["sha256", "gpg"]
+      }
+    },
+    {
+      "id": "fedora-workstation",
+      "name": "Fedora Workstation",
+      "kind": "os",
+      "menuOrder": 5,
+      "architecture": ["x86_64"],
+      "channel": "stable",
+      "sourcePolicy": "official-only",
+      "bootMethod": "netboot",
+      "onlineRequired": true,
+      "recommended": true,
+      "verification": {
+        "required": true,
+        "methods": ["sha256", "gpg"]
+      }
+    },
+    {
+      "id": "debian",
+      "name": "Debian",
+      "kind": "os",
+      "menuOrder": 6,
+      "architecture": ["x86_64"],
+      "channel": "stable",
+      "sourcePolicy": "official-only",
+      "bootMethod": "netboot",
+      "onlineRequired": true,
+      "recommended": true,
+      "verification": {
+        "required": true,
+        "methods": ["sha256", "gpg"]
+      }
+    }
+  ]
+}
