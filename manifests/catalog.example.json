@@ -42,7 +42,7 @@
       },
       "verification": {
         "required": true,
-        "methods": ["sha256", "gpg"]
+        "methods": ["gpg"]
       },
       "notes": [
         "Primary Linux target and first guided Linux installer path."
