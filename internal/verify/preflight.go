@@ -9,27 +9,62 @@ import (
 type ToolLookup func(string) (string, error)
 
 type PreflightResult struct {
-	Binary     string
-	BinaryPath string
-	Keyring    string
+	Verifier      string
+	VerifierPath  string
+	TrustDB       string
+	KeyringSource string
 }
 
-func CheckGPGVPreflight(binary string, keyring string, lookup ToolLookup) (PreflightResult, error) {
+func CheckArchTrustPreflight(
+	binary string,
+	trustDB string,
+	keyringSource string,
+	lookup ToolLookup,
+) (PreflightResult, error) {
 	if binary == "" {
-		binary = "gpgv"
+		binary = "pacman-key"
 	}
 
-	if keyring == "" {
-		return PreflightResult{}, fmt.Errorf("trusted Arch keyring was not configured")
+	if trustDB == "" {
+		return PreflightResult{}, fmt.Errorf(
+			"Arch pacman trust database was not configured",
+		)
 	}
 
-	info, err := os.Stat(keyring)
+	trustInfo, err := os.Stat(trustDB)
 	if err != nil {
-		return PreflightResult{}, fmt.Errorf("trusted Arch keyring unavailable: %w", err)
+		return PreflightResult{}, fmt.Errorf(
+			"Arch pacman trust database unavailable: %w",
+			err,
+		)
 	}
 
-	if info.IsDir() {
-		return PreflightResult{}, fmt.Errorf("trusted Arch keyring path is a directory: %s", keyring)
+	if !trustInfo.IsDir() {
+		return PreflightResult{}, fmt.Errorf(
+			"Arch pacman trust database is not a directory: %s",
+			trustDB,
+		)
+	}
+
+	if keyringSource == "" {
+		return PreflightResult{}, fmt.Errorf(
+			"Arch keyring source was not configured",
+		)
+	}
+
+	keyringInfo, err := os.Stat(keyringSource)
+	if err != nil {
+		return PreflightResult{}, fmt.Errorf(
+			"Arch keyring source unavailable: %w",
+			err,
+		)
+	}
+
+	if keyringInfo.IsDir() {
+		return PreflightResult{}, fmt.Errorf(
+			"Arch keyring source is a directory: %s",
+			keyringSource,
+		)
 	}
 
 	if lookup == nil {
@@ -38,12 +73,17 @@ func CheckGPGVPreflight(binary string, keyring string, lookup ToolLookup) (Prefl
 
 	binaryPath, err := lookup(binary)
 	if err != nil {
-		return PreflightResult{}, fmt.Errorf("%s is unavailable: %w", binary, err)
+		return PreflightResult{}, fmt.Errorf(
+			"%s is unavailable: %w",
+			binary,
+			err,
+		)
 	}
 
 	return PreflightResult{
-		Binary:     binary,
-		BinaryPath: binaryPath,
-		Keyring:    keyring,
+		Verifier:      binary,
+		VerifierPath:  binaryPath,
+		TrustDB:       trustDB,
+		KeyringSource: keyringSource,
 	}, nil
 }
